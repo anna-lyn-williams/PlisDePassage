@@ -1,5 +1,4 @@
-% plot_VSB_anatMeasures.m
-% Plots VSB predictions from each anatomical measure side by side in one figure.
+% Plots VSB predictions from each anatomical measure 
 % Each measure is one column: beta bars on top, predicted-vs-measured scatter below.
 %
 % Requires MATLAB 2025+
