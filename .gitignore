@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# MATLAB autosave / temp
+*.asv
+*.m~
+
+# Excel temp lock files
+~$*
