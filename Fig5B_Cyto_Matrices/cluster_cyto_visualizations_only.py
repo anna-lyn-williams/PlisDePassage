@@ -269,6 +269,7 @@ def plot_dendrogram(Z, labels, outpath, title):
     )
     plt.close()
 
+
 def make_matrix_avg(overlap):
     mat = overlap.pivot(
         index="hit_labels",
@@ -306,7 +307,7 @@ def main():
         # heatmap
         plot_heatmap(
             mat,
-            outdir / f"heatmap_{hemi}.png",
+            outdir / f"heatmap_{hemi}.pdf",
             f"Cyto × ROI overlap — {hemi.upper()}",
         )
 
@@ -317,14 +318,14 @@ def main():
         plot_dendrogram(
             Z,
             orig_labels,
-            outdir / f"dendrogram_{hemi}.png",
+            outdir / f"dendrogram_{hemi}.pdf",
             f"Cyto clustering — {hemi.upper()}",
         )
 
         # clustered heatmap
         plot_heatmap(
             mat_ord,
-            outdir / f"heatmap_clustered_{hemi}.png",
+            outdir / f"heatmap_clustered_{hemi}.pdf",
             f"Clustered Cyto × ROI — {hemi.upper()}",
         )
 

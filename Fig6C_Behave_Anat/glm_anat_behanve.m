@@ -165,8 +165,8 @@ function [good, b, yfit_full] = fit_glm_nanrows_loo(X, y)
         b_all(:,ii)     = b_fold;
     end
 
-    yfit_full             = nan(size(y));
-    yfit_full(find(good)) = yfit_g;
+    yfit_full       = nan(size(y));
+    yfit_full(good) = yfit_g;
     b = mean(b_all, 2, 'omitnan');
 end
 
@@ -176,7 +176,7 @@ function plot_beta_barh(b, labels)
     bh.CData     = b(2:end);
 
     colormap('nebula');
-    caxis([-1.5 1.5]);
+    clim([-1.5 1.5]);
     xlim([-1.4 1.4]); %space of how far the plots exttend within the plots
 
     set(gca, ...

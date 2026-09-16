@@ -7,9 +7,10 @@
 % To run:
 % 1) set trueDataDir and controlDataDir paths and 2) press 'Run'
 % 
-% Swap 'rh' for 'lh' in the filenames below to run the other
-% hemisphere. Specifically, in load('rh.adults.eccentricity_table_AW.mat') and
-% load('rh.adults.eccentricity_table_AW.mat') below.
+% Swap 'rh' for 'lh' in the filenames below to run the other hemisphere.
+% There are two separate load calls — one for the true data (trueDataDir)
+% and one for the spin-test null (controlDataDir) — both load
+% the same filename ('rh.adults.eccentricity_table_AW.mat').
 
 
 clear; clc; close all;

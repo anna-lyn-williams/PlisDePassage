@@ -321,10 +321,10 @@ for plotIdx = 1:2
                 % Combined data: each subject has 8 measurements (4 ROIs x 2 methods)
                 T = array2table([g1, g2], 'VariableNames', ...
                     [strcat(variablesToPlot, '_g1'), strcat(variablesToPlot, '_g2')]);
-                
+
                 % Within design: ROI x Group (both within)
-                withinROI    = [repmat(variablesToPlot', 2, 1)];
-                withinGroup  = [repmat({'g1'}, 4, 1); repmat({'g2'}, 4, 1)];
+                withinROI   = repmat(variablesToPlot', 2, 1);
+                withinGroup = [repmat({'g1'}, numel(variablesToPlot), 1); repmat({'g2'}, numel(variablesToPlot), 1)];
                 within = table(categorical(withinROI), categorical(withinGroup), ...
                     'VariableNames', {'ROI', 'Group'});
                 
