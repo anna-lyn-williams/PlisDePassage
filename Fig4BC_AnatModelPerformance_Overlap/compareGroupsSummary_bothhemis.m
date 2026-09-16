@@ -26,7 +26,7 @@ validCohorts   = {'Observation', 'Replication', 'ReplicationCombined'};
 validAgeGroups = {'adults', 'children', 'combined'};
 
 if ~ismember(group1, validGroups) || ~ismember(group2, validGroups)
-    error('Invalid group. Choose from: Anat, anat_funcPrior, Wang');
+    error('Invalid group. Choose from: Anat, Wang');
 end
 if ~ismember(cohort, validCohorts)
     error('Invalid cohort. Choose from: Observation, Replication, ReplicationCombined');
@@ -44,7 +44,7 @@ if ~strcmp(cohort,'ReplicationCombined') && strcmp(ageGroup,'combined')
 end
 
 %% === Parse Name–Value Parameters ===
-defaultBaseDir = '.'; %_funcConstrained
+defaultBaseDir = '.';
 p = inputParser;
 addParameter(p, 'baseDir',  defaultBaseDir, @(x) ischar(x) || isstring(x));
 addParameter(p, 'runStats', true,           @(x) islogical(x) || isnumeric(x));
@@ -310,14 +310,12 @@ for plotIdx = 1:2
         h1 = plot(mean(g1,1,'omitnan'), 'LineStyle', lineStyles{1}, 'Color', thisColor, 'LineWidth', 2);
         h2 = plot(mean(g2,1,'omitnan'), 'LineStyle', lineStyles{2}, 'Color', thisColor, 'LineWidth', 2);
 
-        legendHandles = [legendHandles h1 h2]; 
+        legendHandles = [legendHandles h1 h2];
         legendLabels  = [legendLabels {sprintf('%s - %s', label, prettyG1), ...
-                                       sprintf('%s - %s', label, prettyG2)}]; 
+                                       sprintf('%s - %s', label, prettyG2)}];
 
         if runStats
             try
-                n_subj = size(g1, 1); 
-                
                 % Combined data: each subject has 8 measurements (4 ROIs x 2 methods)
                 T = array2table([g1, g2], 'VariableNames', ...
                     [strcat(variablesToPlot, '_g1'), strcat(variablesToPlot, '_g2')]);
@@ -331,8 +329,6 @@ for plotIdx = 1:2
                 rm = fitrm(T, 'IPS0_g1-IPS3_g2 ~ 1', 'WithinDesign', within);
                 ranovatbl = ranova(rm, 'WithinModel', 'ROI*Group');
                 rows = string(ranovatbl.Row);   % needed by the idx_* lookups below
-                                
-                
 
                 p_group       = NaN;  F_group = NaN;  df1_group = NaN;  df2_group = NaN;
                 p_roi         = NaN;  F_roi   = NaN;  df1_roi   = NaN;  df2_roi   = NaN;

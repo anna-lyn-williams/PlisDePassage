@@ -12,7 +12,6 @@ import seaborn as sns
 
 from scipy.cluster.hierarchy import linkage, dendrogram
 from scipy.spatial.distance import pdist, squareform
-from scipy.stats import zscore
 from matplotlib.colors import Normalize
 
 
@@ -122,8 +121,6 @@ def make_matrix(overlap, hemi):
     )
     mat = apply_cyto_order(mat)
     mat = apply_roi_order(mat)
-
-    # clean labels
     mat.index = clean_labels(mat.index)
     mat.columns = clean_labels(mat.columns)
 
@@ -192,7 +189,7 @@ def cluster(mat, metric="correlation", method="average", min_shared=2):
 # ----------------------------
 plt.rcParams.update({
     "font.size": 15,
-    "lines.linewidth": 3,  
+    "lines.linewidth": 3,
 })
 
 def plot_heatmap(mat, outpath, title):
@@ -210,8 +207,8 @@ def plot_heatmap(mat, outpath, title):
         annot=True,
         fmt=".2f",
         mask=mat.isna(),
-        cmap=cmap,                
-        norm=norm,                 
+        cmap=cmap,
+        norm=norm,
         cbar_kws={
             "label": "% overlap",
             "ticks": [0, 0.25, 0.5, 0.75, 1.0],
@@ -279,11 +276,12 @@ def make_matrix_avg(overlap):
 
     mat = apply_cyto_order(mat)
     mat = apply_roi_order(mat)
-
     mat.index = clean_labels(mat.index)
     mat.columns = clean_labels(mat.columns)
 
     return mat
+
+
 # ----------------------------
 # Main
 # ----------------------------

@@ -15,13 +15,12 @@ validTypes = {'centroid','meanmin'};
 if ~ismember(lower(distanceType), validTypes)
     error('distanceType must be centroid or meanmin');
 end
-if nargin < 2 || isempty(subjectType),     subjectType    = 'all';       end
-if nargin < 3 || isempty(atlasComparison), atlasComparison = 'anat_wang'; end
+if nargin < 2 || isempty(subjectType),     subjectType     = 'all';        end  %#ok<NASGU> reserved for future subject filtering
+if nargin < 3 || isempty(atlasComparison), atlasComparison = 'anat_wang';  end  %#ok<NASGU> reserved for future atlas-pair selection
 
 dataPath   = './';
 outputPath = fullfile(dataPath,'figures');
 if ~exist(outputPath,'dir'), mkdir(outputPath); end
-addpath('./Violinplot-Matlab')
 
 % Load data
 datasetFiles = { ...
@@ -136,7 +135,7 @@ function plotViolins(a1, a2, boundaries, colors)
         localHalfViolin(gca, b, a2(:,b), 'right', colors.atlas2, 0.45);
     end
 
-    % mean trend lines across boundaries (kept from the original figure)
+    % mean trend lines across boundaries
     x = 1:nB;
     plot(x, mean(a1,1,'omitnan'), 'LineWidth',3, 'Color',colors.atlas1)
     plot(x, mean(a2,1,'omitnan'), 'LineWidth',3, 'Color',colors.atlas2)
